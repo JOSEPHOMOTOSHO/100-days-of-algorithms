@@ -20,7 +20,7 @@ function palinPerm(str){
   let isPalindrome = true
 
   for(let char of cleanString){
-      charCounter[char] = charCounter[char]+ 1 || 1 
+      charCounter[char] = charCounter[char] + 1 || 1 
   }
 
   Object.keys(charCounter).forEach((char) => {
@@ -34,8 +34,7 @@ function palinPerm(str){
     }
     
   })
-charCounter
-isPalindrome
+
 return isPalindrome
 }
 
