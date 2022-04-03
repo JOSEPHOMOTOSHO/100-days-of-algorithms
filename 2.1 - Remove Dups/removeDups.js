@@ -9,6 +9,28 @@ list.
 2. Without extra space, you'll need O(N2 ) time. Try using two pointers, where the second
 one searches ahead of the first one.
 */
+const LinkedList = require("../util/LinkedListX");
+
+function RemoveDups(linkedlist) {
+  let set = new Set();
+
+  let current = linkedlist.head;
+  let previous = null;
+
+  while (current) {
+    if (set.has(current.value)) {
+      let defaulterNode = current;
+      previous.next = current.next;
+      current = current.next;
+      defaulterNode.next = null;
+    } else {
+      set.add(current.value);
+      previous = current;
+      current = current.next;
+    }
+  }
+  return linkedlist;
+}
 
 // quick test
 let list = new LinkedList();
@@ -16,6 +38,6 @@ for (let elem of [1, 5, 1, 6, 8, 6, 8, 8, 8, 8]) {
   list.append(elem);
 }
 
-removeDuplicates(list);
+RemoveDups(list);
 
 console.log(list._toArray()); // [1, 5, 6, 8]
