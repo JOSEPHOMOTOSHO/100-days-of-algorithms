@@ -13,20 +13,11 @@ have access to the 9 node. Can you make it look like the correct answer?
 const LinkedList = require("../util/LinkedListX");
 const printList = require("../util/printList");
 
-function deleteMidNode(list) {
-  let middle = Math.floor(list._toArray().length - 1 / 2);
-  let fp = list.head;
-  let sp = current.next;
-  let count = 1;
-
-  while (count !== middle) {
-    fp = sp;
-    sp = sp.next;
-    count++;
+function deleteMidNode(node) {
+  if (node.next !== null && node.next.next !== null) {
+    node.value = node.next.value;
+    node.next = node.next.next;
   }
-
-  fp.next = sp.next;
-  sp.next = null;
 }
 
 /* TEST */
