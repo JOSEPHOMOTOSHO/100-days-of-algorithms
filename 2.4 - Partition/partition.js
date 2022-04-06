@@ -27,7 +27,7 @@ const partition = (head, val) => {
   let node = head;
 
   while (node !== null) {
-    if (node.val < val) {
+    if (node.value < val) {
       if (!currLeft) {
         left = node;
         currLeft = left;
@@ -35,7 +35,7 @@ const partition = (head, val) => {
         currLeft.next = node;
         currLeft = currLeft.next;
       }
-    } else if (node.val === val) {
+    } else if (node.value === val) {
       if (!currMid) {
         middle = node;
         currMid = middle;
@@ -54,9 +54,9 @@ const partition = (head, val) => {
     }
     node = node.next;
   }
-
-  currRight.next = null;
   currLeft.next = middle;
+  currRight.next = null;
+
   currMid.next = right;
   return left;
 };
