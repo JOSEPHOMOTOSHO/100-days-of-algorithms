@@ -1,35 +1,29 @@
-/*
-Remove Dups! Write code to remove duplicates from an unsorted linked list.
-FOLLOW UP
-How would you solve this problem if a temporary buffer is not allowed?
-Hints: #9, #40
-1. Have you tried a hash table? You should be able to do this in a single pass of the linked
-list.
-
-2. Without extra space, you'll need O(N2 ) time. Try using two pointers, where the second
-one searches ahead of the first one.
-*/
+// remiveDups redone
 const LinkedList = require("../util/LinkedListX");
 
-function RemoveDups(linkedlist) {
-  let set = new Set();
-
-  let current = linkedlist.head;
-  let previous = null;
-
-  while (current) {
-    if (set.has(current.value)) {
-      let defaulterNode = current;
-      previous.next = current.next;
-      current = current.next;
-      defaulterNode.next = null;
+function removeDuplicates(list) {
+  const _set = new Set();
+  let cur = list.head;
+  let prev = null;
+  while (cur) {
+    if (_set.has(cur.value)) {
+      // duplicate found
+      // de-link it from the list
+      // cur jumps next but previous stays
+      // right behind cur (as always)
+      let elem = cur;
+      prev.next = cur.next;
+      cur = cur.next;
+      elem.next = null;
     } else {
-      set.add(current.value);
-      previous = current;
-      current = current.next;
+      // add to the set
+      _set.add(cur.value);
+      prev = cur;
+      cur = cur.next;
     }
   }
-  return linkedlist;
+
+  return list;
 }
 
 // quick test
@@ -38,6 +32,6 @@ for (let elem of [1, 5, 1, 6, 8, 6, 8, 8, 8, 8]) {
   list.append(elem);
 }
 
-RemoveDups(list);
+removeDuplicates(list);
 
 console.log(list._toArray()); // [1, 5, 6, 8]

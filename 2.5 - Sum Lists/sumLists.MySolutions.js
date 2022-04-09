@@ -10,8 +10,8 @@ Suppose the digits are stored in forward order. Repeat the above problem.
 Input: (6 -> 1 -> 7) + (2 -> 9 -> 5).That is,617 + 295.
 Output: 9 -> 1 -> 2. That is, 912.
 */
-var LinkedList = require("./../util/LinkedList");
-var printList = require("./../util/printList");
+var LinkedList = require("../util/LinkedList");
+var printList = require("../util/printList");
 
 function sumList(l1, l2) {
   // create a new linked list

@@ -27,8 +27,6 @@ var intersection = function (head1, head2) {
   let head1Length = getLength(head1);
   let head2Length = getLength(head2);
   let diff = Math.abs(head1Length - head2Length);
-  head1Length;
-  head2Length;
 
   while (diff !== 0) {
     if (head2Length > head1Length) {
