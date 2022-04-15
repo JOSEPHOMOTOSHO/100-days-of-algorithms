@@ -47,7 +47,9 @@ var characterReplacement = function (s, k) {
         possibleReplacements--;
       }
       leftPointer++;
+      rightPointer++;
     }
   }
   return result;
 };
+console.log(characterReplacement("AABABBA", 1), 4);
