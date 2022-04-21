@@ -28,7 +28,7 @@ Output: []
  */
 const threeSum = (nums) => {
   let result = [];
-  nums.sort();
+  nums.sort((a, b) => a - b);
   let leftPointer, rightPointer;
 
   //loop through each element
