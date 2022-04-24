@@ -26,7 +26,9 @@ Constraints:
 */
 const threeSumClosest = (nums, target) => {
   nums.sort((a, b) => a - b);
+
   let bestSum = Number.MAX_SAFE_INTEGER;
+
   let leftPointer, rightPointer;
   //loop through each element
 
@@ -63,3 +65,5 @@ const threeSumClosest = (nums, target) => {
   }
   return bestSum;
 };
+
+console.log(threeSumClosest([-1, 2, 1, -4], 1), 2);

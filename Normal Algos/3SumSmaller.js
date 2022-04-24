@@ -1,39 +1,69 @@
 /*
-Given an array of n integers nums and a target, find the number of index triplets 
-i, j, k with 0 <= i < j < k < n that satisfy the condition nums[i] + nums[j] + nums[k] < target.
+Given an integer array nums of length n and an integer target, find three integers in nums such that the sum is closest to target.
 
-Input: nums = [-2,0,1,3], and target = 2
+Return the sum of the three integers.
+
+You may assume that each input would have exactly one solution.
+
+ 
+
+Example 1:
+
+Input: nums = [-1,2,1,-4], target = 1
 Output: 2
-Explanation: Because there are two triplets which sums are less than 2:
-             [-2,0,1]
-             [-2,0,3]
+Explanation: The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
+Example 2:
+
+Input: nums = [0,0,0], target = 1
+Output: 0
+ 
+
+Constraints:
+3 <= nums.length <= 1000
+-1000 <= nums[i] <= 1000
+-104 <= target <= 104
+
 */
-/**
- * @param {number[]} nums
- * @param {number} target
- * @return {number}
- */
-const threeSumSmaller = (nums, target) => {
-  //   nums.sort((a, b) => a - b);
-  let result = 0;
+const threeSumClosest = (nums, target) => {
+  nums.sort((a, b) => a - b);
+
+  let bestSum = Number.MAX_SAFE_INTEGER;
+
   let leftPointer, rightPointer;
   //loop through each element
+
   for (let [index, number] of nums.entries()) {
     if (index > 0 && number === nums[index - 1]) continue;
+
     leftPointer = index + 1;
     rightPointer = nums.length - 1;
+
     while (leftPointer < rightPointer) {
       let threeSum = number + nums[leftPointer] + nums[rightPointer];
-      if (threeSum < target) {
-        result = result + (rightPointer - leftPointer);
+
+      if (threeSum === target) {
+        return target;
+      }
+
+      if (Math.abs(target - threeSum) < Math.abs(target - bestSum)) {
+        bestSum = threeSum;
+      }
+
+      if (threeSum <= target) {
         leftPointer++;
+
+        while (
+          nums[leftPointer] === nums[leftPointer - 1] &&
+          leftPointer < rightPointer
+        ) {
+          leftPointer++;
+        }
       } else {
         rightPointer--;
       }
     }
   }
-
-  return result;
+  return bestSum;
 };
 
-console.log(threeSumSmaller([-2, 0, 1, 3], 2));
+console.log(threeSumClosest([-1, 2, 1, -4], 1), 2);
