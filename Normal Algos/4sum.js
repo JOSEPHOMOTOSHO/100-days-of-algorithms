@@ -24,4 +24,64 @@ Constraints:
 -109 <= nums[i] <= 109
 -109 <= target <= 109
 */
-const fourSum = (nums, target) => {};
+
+const fourSum = (nums, target) => {
+  let solutionArrays = [];
+
+  //first sort the array
+  nums.sort((a, b) => a - b);
+
+  //loop through the array except the last 3 numbers (we need to have 4 numbers atleast)
+  for (let behindIndex = 0; behindIndex < nums.length - 3; behindIndex++) {
+    //check for duplicates
+    if (behindIndex > 0 && nums[behindIndex] === nums[behindIndex - 1])
+      continue;
+
+    //loop through from the second element
+    for (
+      let aheadIndex = behindIndex + 1;
+      aheadIndex < nums.length - 2;
+      aheadIndex++
+    ) {
+      if (
+        aheadIndex > behindIndex + 1 &&
+        nums[aheadIndex] === nums[aheadIndex - 1]
+      )
+        continue;
+
+      let leftPointer = aheadIndex + 1;
+      let rightPointer = nums.length - 1;
+
+      while (leftPointer < rightPointer) {
+        let fourSum =
+          nums[behindIndex] +
+          nums[aheadIndex] +
+          nums[leftPointer] +
+          nums[rightPointer];
+        if (fourSum === target) {
+          solutionArrays.push([
+            nums[behindIndex],
+            nums[aheadIndex],
+            nums[leftPointer],
+            nums[rightPointer],
+          ]);
+          do {
+            leftPointer++;
+          } while (nums[leftPointer] === nums[leftPointer - 1]);
+
+          do {
+            rightPointer--;
+          } while (nums[rightPointer] === nums[rightPointer + 1]);
+        } else if (fourSum < target) {
+          leftPointer++;
+        } else {
+          rightPointer--;
+        }
+      }
+    }
+  }
+
+  return solutionArrays;
+};
+//sol => [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
+console.log(fourSum([1, 0, -1, 0, -2, 2], 0));
