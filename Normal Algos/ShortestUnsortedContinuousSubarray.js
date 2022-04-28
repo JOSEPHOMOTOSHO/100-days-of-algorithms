@@ -26,4 +26,47 @@ Constraints:
 -105 <= nums[i] <= 105
 */
 
-const findUnsortedSubarray = (nums) => {};
+const findUnsortedSubarray = (nums) => {
+  let max = Number.MIN_SAFE_INTEGER;
+  let min = Number.MAX_SAFE_INTEGER;
+
+  let sorted = true;
+
+  for (let index = 1; index < nums.length; index++) {
+    if (nums[index] < nums[index - 1]) {
+      sorted = false;
+      if (!sorted) {
+        min = Math.min(min, nums[index]);
+      }
+      sorted = true;
+    }
+  }
+
+  for (let index = nums.length - 2; index >= 0; index--) {
+    if (nums[index] > nums[index + 1]) {
+      sorted = false;
+      if (!sorted) {
+        max = Math.max(max, nums[index]);
+      }
+      sorted = true;
+    }
+  }
+
+  let leftPointer;
+  for (leftPointer = 0; leftPointer < nums.length; leftPointer++) {
+    if (min < nums[leftPointer]) {
+      break;
+    }
+  }
+
+  let rightPointer;
+  for (rightPointer = nums.length - 1; rightPointer >= 0; rightPointer--) {
+    if (max > nums[rightPointer]) {
+      break;
+    }
+  }
+
+  return rightPointer - 1 < 0 ? 0 : rightPointer - leftPointer + 1;
+};
+
+console.log(findUnsortedSubarray([2, 6, 4, 8, 10, 9, 15]), 5);
