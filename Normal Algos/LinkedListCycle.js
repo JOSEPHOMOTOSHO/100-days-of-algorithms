@@ -5,3 +5,20 @@ There is a cycle in a linked list if there is some node in the list that can be 
 
 Return true if there is a cycle in the linked list. Otherwise, return false
 */
+
+var hasCycle = function (head) {
+  let fastPointer = head;
+  let slowPointer = head;
+
+  while (fastPointer !== null && fastPointer.next !== null) {
+    fastPointer = fastPointer.next.next;
+    slowPointer = slowPointer.next;
+    if (fastPointer === slowPointer) return true;
+  }
+
+  return false;
+};
+
+console.log(hasCycle([3, 2, 0, -4]));
+
+//solution works on leetcode
