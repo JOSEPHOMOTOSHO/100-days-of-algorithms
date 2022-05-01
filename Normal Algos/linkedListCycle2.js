@@ -6,4 +6,21 @@ There is a cycle in a linked list if there is some node in the list that can be 
 Do not modify the linked list.
 */
 
-const detectCycle = (head) => {};
+const detectCycle = (head) => {
+  let slowPointer = head;
+  let fastPointer = head;
+
+  while (fastPointer !== null && fastPointer.next !== null) {
+    slowPointer = slowPointer.next;
+    fastPointer = fastPointer.next.next;
+    if (slowPointer === fastPointer) {
+      slowPointer = head;
+      while (slowPointer !== fastPointer) {
+        slowPointer = slowPointer.next;
+        fastPointer = fastPointer.next;
+      }
+      return slowPointer;
+    }
+  }
+  return null;
+};
