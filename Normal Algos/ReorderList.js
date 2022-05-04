@@ -8,7 +8,7 @@ L0 → Ln → L1 → Ln - 1 → L2 → Ln - 2 → …
 You may not modify the values in the list's nodes. Only nodes themselves may be changed.
 
 
-https://leetcode.com/problems/reorder-list/
+https://leetcode.com/problems/reorder-list/.
 */
 
 /**
