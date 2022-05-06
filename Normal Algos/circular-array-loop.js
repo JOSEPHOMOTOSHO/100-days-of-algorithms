@@ -49,4 +49,53 @@ nums[i] != 0
  * @param {number[]} nums
  * @return {boolean}
  */
-const circularArrayLoop = (nums) => {};
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+ const circularArrayLoop = (nums) =>  {
+    if(nums.length <= 1) return false 
+    for(let i = 0; i < nums.length;i++){
+        let isForward = nums[i] > 0 ? true : false
+        let slowPointer = i
+        let fastPointer = i
+        while(true){
+            slowPointer = getNextPosition(nums, slowPointer, isForward)
+            if(slowPointer === -1) break
+            
+            fastPointer = getNextPosition(nums, fastPointer, isForward)
+            if(fastPointer === -1) break
+            
+            fastPointer = getNextPosition(nums, fastPointer, isForward)
+            if(fastPointer === -1) break
+            
+            if(fastPointer === slowPointer) return true
+            
+        }
+    }
+    return false
+};
+
+const getNextPosition = (nums,index,isForward) => {
+    //Does the current element say we move forward/backward?
+    let direction = nums[index] >= 0
+    
+    //confirm if we are generally moving forward
+    if(direction !== isForward) return -1
+    
+    //lets get the next index through the current value
+    let nextIndex = (nums[index] + index) % nums.length
+    
+    //getting the same index means you have a single element
+    if(nextIndex === index) return -1
+    
+    //if the nextindex is negative you'd need to count backwards
+    if(nextIndex < 0){
+        nextIndex = nextIndex + nums.length
+    }
+    
+    return nextIndex
+    
+}
+
+console.log(circularArrayLoop( [2,-1,1,2,2]),true)
