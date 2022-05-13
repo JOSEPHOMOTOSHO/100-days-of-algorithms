@@ -9,3 +9,26 @@ Examples
 Constraints
 0 <= input.length <= 100
 */
+
+function validParentheses(parens) {
+    // your code here ..
+    const openParens = ["[","{","("]
+    const parensMatch = {
+      '}':'{',
+      ']':'[',
+     ')' :'('
+    }
+    let stack = []
+    for(let paren of parens){
+      if(openParens.includes(paren)){
+        stack.push(paren)
+      }else if(!openParens.includes(paren) && parensMatch[paren] === stack[stack.length - 1] ){
+        stack.pop()
+      }else{
+        return false
+      }
+    }
+    return stack.length === 0 ? true : false
+  }
+
+  console.log(validParentheses(['(',"(",")",")"]),true);
