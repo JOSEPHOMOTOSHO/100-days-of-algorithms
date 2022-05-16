@@ -32,6 +32,23 @@ Each element in nums appears once or twice.
  * @param {number[]} nums
  * @return {number[]}
  */
- const findDuplicates = (nums) => {
-    
+ /**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+const findDuplicates = (nums) => {
+    let result = []
+    for(let i = 0; i<nums.length; i++){
+        //we referenced something before, while moving forward we referenced again, the //duplicate rference is the duplicate value
+      let convertToIndex = Math.abs(nums[i]) - 1
+     if(nums[convertToIndex] < 0){
+         result.push(Math.abs(nums[i]))
+     }else{
+        nums[convertToIndex] = Math.abs( nums[convertToIndex] ) * -1
+     }
+   
+    }
+    return result
 };
+
+console.log(findDuplicates([4,3,2,7,8,2,3,1]),[2,3])
