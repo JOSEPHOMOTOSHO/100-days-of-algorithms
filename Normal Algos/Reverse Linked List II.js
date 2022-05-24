@@ -30,46 +30,42 @@ reverse the nodes of the list from position left to position right, and return t
  * @param {number} right
  * @return {ListNode}
  */
-var reverseBetween = function(head, left, right) {
-    if(left === right) return head
-    if (!head || !head.next) return head;
-    //have two pointers
-    let leftPointer = 1
-    let rightPointer = 1
-    let leftNode = head
-    let rightNode = head
-    let nodeBeforeLeftNode = head
-    let nodeAfterRightNode
-    while(leftPointer < left){
-        if(left - leftPointer === 1){
-             nodeBeforeLeftNode = leftNode
-        }
-        leftNode = leftNode.next
-        leftPointer++
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @param {number} left
+ * @param {number} right
+ * @return {ListNode}
+ */
+ const reverseBetween = (head, left, right) => {
+    let dummyNode = new ListNode(0,head)
+    let leftPrev = dummyNode
+    let current = head
+    
+    for(let i = 1; i <= left - 1 ; i++){
+        leftPrev = current
+        current = current.next
     }
-    
-     while(rightPointer < right){
-        rightNode = rightNode.next
-        rightPointer++
-    }
-    
- nodeAfterRightNode = rightNode.next
-    
-    //reverse the sub portion
     let prev = null
-    let leftNodeHold = leftNode
-    while(leftNode && leftNode !== nodeAfterRightNode){
-        let next = leftNode.next
-        leftNode.next = prev
-        prev = leftNode
-        leftNode = next
+    for(let i = left; i < right + 1; i++){
+        let next = current.next
+        current.next = prev
+        prev = current
+        current = next
     }
-nodeBeforeLeftNode.next = rightNode
-leftNodeHold.next = nodeAfterRightNode
- 
-return nodeBeforeLeftNode
+   
+    leftPrev.next.next = current
+    leftPrev.next = prev
+    return dummyNode.next
+    
+    
 };
-
 
 
 
