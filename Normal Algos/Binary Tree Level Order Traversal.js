@@ -1,7 +1,3 @@
-/*
-Given the root of a binary tree, return the level order traversal of its nodes' values.
- (i.e., from left to right, level by level).
-*/
 /**
  * Definition for a binary tree node.
  * function TreeNode(val, left, right) {
@@ -14,7 +10,26 @@ Given the root of a binary tree, return the level order traversal of its nodes' 
  * @param {TreeNode} root
  * @return {number[][]}
  */
- const levelOrder = (root) => {
-     
-    
+ var levelOrder = function(root) {
+    let result = []
+    if(!root) return []
+    let queue = []
+    queue.push(root)
+    while(queue.length > 0){
+        let row = []
+        let rowSize = queue.length 
+        while(rowSize > 0){
+            let node = queue.shift()
+            if(node.left !== null){
+                queue.push(node.left)
+            }
+             if(node.right !== null){
+                queue.push(node.right)
+            }
+            row.push(node.val)
+            rowSize--
+        }
+          result.push(row)
+    }
+  return result
 };
